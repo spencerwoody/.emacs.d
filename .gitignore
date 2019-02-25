@@ -255,49 +255,49 @@ TSWLatexianTemp*
 
 # -*- mode: gitignore; -*-
 *~
-\#*\#
-/.emacs.desktop
-/.emacs.desktop.lock
-*.elc
-auto-save-list
-tramp
-.\#*
+# \#*\#
+# /.emacs.desktop
+# /.emacs.desktop.lock
+# *.elc
+# auto-save-list
+# tramp
+# .\#*
 
-# Org-mode
-.org-id-locations
-*_archive
+# # Org-mode
+# .org-id-locations
+# *_archive
 
-# flymake-mode
-*_flymake.*
+# # flymake-mode
+# *_flymake.*
 
-# eshell files
-/eshell/history
-/eshell/lastdir
+# # eshell files
+# /eshell/history
+# /eshell/lastdir
 
-# elpa packages
-# /elpa/
+# # elpa packages
+# # /elpa/
 
-# reftex files
-*.rel
+# # reftex files
+# *.rel
 
-# AUCTeX auto folder
-/auto/
+# # AUCTeX auto folder
+# /auto/
 
-# cask packages
-.cask/
-dist/
+# # cask packages
+# .cask/
+# dist/
 
-# Flycheck
-flycheck_*.el
+# # Flycheck
+# flycheck_*.el
 
-# server auth directory
-/server/
+# # server auth directory
+# /server/
 
-# projectiles files
-.projectile
+# # projectiles files
+# .projectile
 
-# directory configuration
-.dir-locals.el
+# # directory configuration
+# .dir-locals.el
 
 ### macOS files
 
