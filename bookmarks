@@ -1,0 +1,80 @@
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*- 
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("Desktop"
+ (filename . "~/Desktop/")
+ (front-context-string . "24780641.pdf\n  -")
+ (rear-context-string . "56 Feb 22 14:35 ")
+ (position . 130))
+("old-classes"
+ (filename . "~/Documents/old-classes/")
+ (front-context-string)
+ (rear-context-string . "96 Feb 24 13:01 ")
+ (position . 138))
+("Documents"
+ (filename . "~/Documents/")
+ (front-context-string . "600s_UT Shuttles")
+ (rear-context-string . "48 Feb 17 20:45 ")
+ (position . 130))
+("Templates"
+ (filename . "~/Templates/")
+ (front-context-string . "beowulf-setup.or")
+ (rear-context-string . "20 Feb 16 10:42 ")
+ (position . 127))
+("Reference"
+ (filename . "~/Dropbox/Papers/Reference/")
+ (front-context-string . "auctex-ref.pdf\n ")
+ (rear-context-string . "55 Aug  5  2018 ")
+ (position . 147))
+("Papers"
+ (filename . "~/Dropbox/Papers/")
+ (front-context-string . "ACIC-submissions")
+ (rear-context-string . "96 Feb 13 16:20 ")
+ (position . 134))
+("Dropbox"
+ (filename . "~/Dropbox/")
+ (front-context-string . "Apps\n  drwxr-xr-")
+ (rear-context-string . "96 Feb 13 16:19 ")
+ (position . 126))
+(".emacs"
+ (filename . "~/.emacs")
+ (front-context-string . "\n;;;;;;;;;;;;;;;")
+ (rear-context-string)
+ (position . 1))
+("UQ"
+ (filename . "~/pCloudDrive/Projects/UQ/")
+ (front-context-string . "Background\n  drw")
+ (rear-context-string . "96 Aug 12  2018 ")
+ (position . 150))
+("HTEworkshop"
+ (filename . "~/Dropbox/SJC/HTEworkshop/")
+ (front-context-string . "cited-papers\n  d")
+ (rear-context-string . "96 Feb 13 16:22 ")
+ (position . 144))
+("SPACEPOSI"
+ (filename . "~/pCloudDrive/Projects/SPACEPOSI/")
+ (front-context-string . "beamer\n  -rw-r--")
+ (rear-context-string . "96 Aug 12  2018 ")
+ (position . 157))
+("FABX"
+ (filename . "~/pCloudDrive/Projects/FABX/")
+ (front-context-string . "_aux\n  -rw-r--r-")
+ (rear-context-string . "96 Oct 19 10:10 ")
+ (position . 150))
+("saFAB"
+ (filename . "~/pCloudDrive/Projects/saFAB/")
+ (front-context-string . "build.R\n  -rw-r-")
+ (rear-context-string . "10 Sep 17 12:46 ")
+ (position . 144))
+("ASTRAL"
+ (filename . "~/pCloudDrive/Projects/ASTRAL/")
+ (front-context-string . "atf\n  drwxr-xr-x")
+ (rear-context-string . "96 Nov  5 08:03 ")
+ (position . 154))
+("Projects"
+ (filename . "~/pCloudDrive/Projects/")
+ (front-context-string . "ACIC-Challenge\n ")
+ (rear-context-string . "96 Jan  9 10:38 ")
+ (position . 139))
+)
