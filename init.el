@@ -3,7 +3,6 @@
 					;                Basics               ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Initialize packages
 (package-initialize)
 
 ;; deactivate splash screen at startup, though I do like it...
