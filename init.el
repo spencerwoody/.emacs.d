@@ -468,7 +468,7 @@ Version 2016-10-15"
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(package-selected-packages
    (quote
-    (matlab-mode ssh-deploy darktooth-theme gruvbox-theme hippie-exp-ext spacemacs-theme moe-theme material-theme monokai-theme color-theme-sanityinc-tomorrow solarized-theme zenburn-theme markdown-mode julia-mode default-text-scale vimish-fold ssh ace-window polymode magit company auto-complete helm yasnippet ess auctex)))
+    (rainbow-delimiters matlab-mode ssh-deploy darktooth-theme gruvbox-theme hippie-exp-ext spacemacs-theme moe-theme material-theme monokai-theme color-theme-sanityinc-tomorrow solarized-theme zenburn-theme markdown-mode julia-mode default-text-scale vimish-fold ssh ace-window polymode magit company auto-complete helm yasnippet ess auctex)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#FFFACE")
  '(pos-tip-foreground-color "#272822")
