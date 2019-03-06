@@ -19,14 +19,68 @@
 (require 'default-text-scale)
 (default-text-scale-mode 1)
 
+;; Newline and indent by default
+(define-key global-map (kbd "RET") 'newline-and-indent)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+					;             Brackets...             ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defvar xah-curly-brackets nil "string of left/right curly bracket pair.")
+(setq xah-curly-brackets "{}")
+
+(defvar xah-left-curly-bracket '( "{" )
+  "list of left bracket char.")
+(progn
+;; make xah-left-brackets based on xah-brackets
+  (setq xah-left-curly-bracket '())
+  (dotimes ($x (- (length xah-curly-brackets) 1))
+    (when (= (% $x 2) 0)
+      (push (char-to-string (elt xah-curly-brackets $x))
+            xah-left-curly-bracket)))
+  (setq xah-left-curly-bracket (reverse xah-left-curly-bracket)))
+
+(defvar xah-right-curly-bracket '( "}" )
+  "list of right curly bracket char.")
+(progn
+  (setq xah-right-curly-brackets '())
+  (dotimes ($x (- (length xah-curly-brackets) 1))
+    (when (= (% $x 2) 1)
+      (push (char-to-string (elt xah-curly-brackets $x))
+            xah-right-curly-bracket)))
+  (setq xah-right-curly-bracket (reverse xah-right-curly-bracket)))
+
+(defun xah-backward-left-curly-bracket ()
+  "Move cursor to the previous occurrence of left bracket.
+The list of brackets to jump to is defined by `xah-left-brackets'.
+URL `http://ergoemacs.org/emacs/emacs_navigating_keys_for_brackets.html'
+Version 2015-10-01"
+  (interactive)
+  (re-search-backward (regexp-opt xah-left-curly-bracket) nil t))
+
+(defun xah-forward-right-curly-bracket ()
+  "Move cursor to the next occurrence of right bracket.
+The list of brackets to jump to is defined by `xah-right-brackets'.
+URL `http://ergoemacs.org/emacs/emacs_navigating_keys_for_brackets.html'
+Version 2015-10-01"
+  (interactive)
+  (re-search-forward (regexp-opt xah-right-curly-bracket) nil t))
+
+(global-set-key (kbd "M-7") 'xah-backward-left-curly-bracket)
+(global-set-key (kbd "M-8") 'xah-forward-right-curly-bracket) 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+					;            (end brackets)           ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; dired guesses target
 (setq dired-dwim-target t)
 
 ;; Minimal UI
-;;(scroll-bar-mode -1)
+(scroll-bar-mode -1)
 (tool-bar-mode   -1)
 (tooltip-mode    -1)
-;;(menu-bar-mode   -1)
+;; (menu-bar-mode   -1)
 
 ;; show parenthesis matching
 (show-paren-mode 1)
@@ -39,6 +93,9 @@
 
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
+
+;; Delete text in a sane way...
+(delete-selection-mode 1)
 
 ;; ignore certain file extensions in dired
 (require 'dired-x)
@@ -152,6 +209,14 @@
 (setq org-src-fontify-natively t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+					;            expand-region            ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 					;                magit                ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -263,8 +328,8 @@
   (insert "<-")
   (just-one-space 1))
 ;;  (reindent-then-newline-and-indent))
-(define-key ess-mode-map (kbd "C-=") 'my_assignment)
-(define-key inferior-ess-mode-map (kbd "C-=") 'my_assignment)
+(define-key ess-mode-map (kbd "C--") 'my_assignment)
+(define-key inferior-ess-mode-map (kbd "C--") 'my_assignment)
 
 ;; Set matrix multiply
 (defun my_matply ()
@@ -283,13 +348,22 @@
 (setq comint-move-point-for-output t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+					;               Openwith              ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'openwith)
+(openwith-mode t)
+(setq openwith-associations '(("\\.pdf\\'" "evince" (file))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 					;             Default font            ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; set default font
 ;; (set-frame-font "Inconsolata 13" nil t)
 ;; (set-frame-font "PT Mono 13" nil t)
-(set-frame-font "Hack 12" nil t)
+(set-frame-font "Iosevka 12" nil t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -332,23 +406,43 @@ Version 2016-10-15"
                             (start-process "" nil "xdg-open" $fpath))) $file-list))))))
 
 ;; Global hot key
-(global-set-key "\M-O" 'xah-open-in-external-app)
+(global-set-key "\C-\M-o" 'xah-open-in-external-app)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 					;                 revive+             ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+(add-to-list 'load-path "~/.emacs.d/github/")
 (add-to-list 'load-path "~/.emacs.d/github/revive-plus/")
 
-(load "revive")
-(load "revive+")
 
-(autoload 'save-current-configuration "revive" "Save status" t)
-(autoload 'resume "revive" "Resume Emacs" t)
-(autoload 'wipe "revive" "Wipe Emacs" t)
+;; (load "revive")
+(load "revive+")
+(load "dired+")
+;; (load "dired-sort-menu+")
+      
+(require 'dired
+  :config
+  (require 'dired+
+	       :ensure t))
+
+(setq dired-listing-switches "-aBhl  --group-directories-first")
+
+;; ;; Put directories first in dired mode
+(setq ls-lisp-use-insert-directory-program nil)
+(setq ls-lisp-dirs-first t)
+
+(setq diredp-hide-details-initially-flag nil)
+(setq diredp-hide-details-propagate-flag nil)
+
+;; (autoload 'save-current-configuration "revive" "Save status" t)
+;; (autoload 'resume "revive" "Resume Emacs" t)
+;; (autoload 'wipe "revive" "Wipe Emacs" t)
 
 ;; And define favorite keys to those functions.  Here is a sample. 
+
+
 
 (define-key ctl-x-map "S" 'save-current-configuration)
 (define-key ctl-x-map "F" 'resume)
@@ -412,10 +506,10 @@ Version 2016-10-15"
  '(cua-normal-cursor-color "#839496")
  '(cua-overwrite-cursor-color "#b58900")
  '(cua-read-only-cursor-color "#859900")
- '(custom-enabled-themes (quote (material-light)))
+ '(custom-enabled-themes (quote (zenburn)))
  '(custom-safe-themes
    (quote
-    ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d3e333eaa461c82a124f7e7a7a9637d56fc3019478becb1847952804ca67743e" "a22f40b63f9bc0a69ebc8ba4fbc6b452a4e3f84b80590ba0a92b4ff599e53ad0" "8e797edd9fa9afec181efbfeeebf96aeafbd11b69c4c85fa229bb5b9f7f7e66c" "b583823b9ee1573074e7cbfd63623fe844030d911e9279a7c8a5d16de7df0ed0" "2b9dc43b786e36f68a9fd4b36dd050509a0e32fe3b0a803310661edb7402b8b6" "8f97d5ec8a774485296e366fdde6ff5589cf9e319a584b845b6f7fa788c9fa9a" "585942bb24cab2d4b2f74977ac3ba6ddbd888e3776b9d2f993c5704aa8bb4739" "1436d643b98844555d56c59c74004eb158dc85fc55d2e7205f8d9b8c860e177f" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "26d49386a2036df7ccbe802a06a759031e4455f07bda559dcf221f53e8850e69" "13d20048c12826c7ea636fbe513d6f24c0d43709a761052adbca052708798ce3" "e61752b5a3af12be08e99d076aedadd76052137560b7e684a8be2f8d2958edc3" "a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" "bd7b7c5df1174796deefce5debc2d976b264585d51852c962362be83932873d9" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d057f0430ba54f813a5d60c1d18f28cf97d271fd35a36be478e20924ea9451bd" "080fd60366fb1d6e7aea9f8fd0de03e2a40ac995e51b1ed21de37431d43b4d88" default)))
+    ("068da66dd5ef78a0fe9245895740a0ba472369032b29bc55df1e7b9db025e46c" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d3e333eaa461c82a124f7e7a7a9637d56fc3019478becb1847952804ca67743e" "a22f40b63f9bc0a69ebc8ba4fbc6b452a4e3f84b80590ba0a92b4ff599e53ad0" "8e797edd9fa9afec181efbfeeebf96aeafbd11b69c4c85fa229bb5b9f7f7e66c" "b583823b9ee1573074e7cbfd63623fe844030d911e9279a7c8a5d16de7df0ed0" "2b9dc43b786e36f68a9fd4b36dd050509a0e32fe3b0a803310661edb7402b8b6" "8f97d5ec8a774485296e366fdde6ff5589cf9e319a584b845b6f7fa788c9fa9a" "585942bb24cab2d4b2f74977ac3ba6ddbd888e3776b9d2f993c5704aa8bb4739" "1436d643b98844555d56c59c74004eb158dc85fc55d2e7205f8d9b8c860e177f" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "26d49386a2036df7ccbe802a06a759031e4455f07bda559dcf221f53e8850e69" "13d20048c12826c7ea636fbe513d6f24c0d43709a761052adbca052708798ce3" "e61752b5a3af12be08e99d076aedadd76052137560b7e684a8be2f8d2958edc3" "a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" "bd7b7c5df1174796deefce5debc2d976b264585d51852c962362be83932873d9" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d057f0430ba54f813a5d60c1d18f28cf97d271fd35a36be478e20924ea9451bd" "080fd60366fb1d6e7aea9f8fd0de03e2a40ac995e51b1ed21de37431d43b4d88" default)))
  '(fci-rule-color "#eee8d5")
  '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
  '(frame-background-mode (quote light))
@@ -468,7 +562,7 @@ Version 2016-10-15"
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(package-selected-packages
    (quote
-    (rainbow-delimiters matlab-mode ssh-deploy darktooth-theme gruvbox-theme hippie-exp-ext spacemacs-theme moe-theme material-theme monokai-theme color-theme-sanityinc-tomorrow solarized-theme zenburn-theme markdown-mode julia-mode default-text-scale vimish-fold ssh ace-window polymode magit company auto-complete helm yasnippet ess auctex)))
+    (expand-region nimbus-theme poly-R poly-markdown openwith rainbow-delimiters matlab-mode ssh-deploy darktooth-theme gruvbox-theme hippie-exp-ext spacemacs-theme moe-theme material-theme monokai-theme color-theme-sanityinc-tomorrow solarized-theme zenburn-theme markdown-mode julia-mode default-text-scale vimish-fold ssh ace-window polymode magit company auto-complete helm yasnippet ess auctex)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#FFFACE")
  '(pos-tip-foreground-color "#272822")

@@ -2,20 +2,50 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("Desktop"
+(("mathnotes"
+ (filename . "~/Templates/mathnotes/")
+ (front-context-string . "car-prior\n  drwx")
+ (rear-context-string . "96 Feb 16 10:42 ")
+ (position . 136))
+("spencerwoody.github.io"
+ (filename . "~/Projects/website/spencerwoody.github.io/")
+ (front-context-string . "2018-09-15-uq-mi")
+ (rear-context-string . "96 Feb 13 17:28 ")
+ (position . 160))
+("site_build"
+ (filename . "~/Projects/website/site_build/")
+ (front-context-string . "content\n  -rw-r-")
+ (rear-context-string . "96 Feb 13 17:28 ")
+ (position . 272))
+("website"
+ (filename . "~/Projects/website/")
+ (front-context-string . "site_build\n  drw")
+ (rear-context-string . "96 Feb 13 17:28 ")
+ (position . 134))
+("init.el"
+ (filename . "~/.emacs.d/init.el")
+ (front-context-string . "\n;;;;;;;;;;;;;;;")
+ (rear-context-string)
+ (position . 1))
+(".emacs.d"
+ (filename . "~/.emacs.d/")
+ (front-context-string . "abbrev_defs\n  -r")
+ (rear-context-string . "93 Feb 16 13:07 ")
+ (position . 127))
+("scratch-r-packages"
+ (filename . "~/Desktop/scratch/r-packages/")
+ (front-context-string . "GPFDA\n  -rw-r--r")
+ (rear-context-string . "96 Sep 29  2014 ")
+ (position . 145))
+("scratch"
+ (filename . "~/Desktop/scratch/")
+ (front-context-string . "a.out\n  drwxr-xr")
+ (rear-context-string . "68 Sep 20 13:05 ")
+ (position . 138))
+("Desktop"
  (filename . "~/Desktop/")
  (front-context-string . "24780641.pdf\n  -")
  (rear-context-string . "56 Feb 22 14:35 ")
- (position . 130))
-("old-classes"
- (filename . "~/Documents/old-classes/")
- (front-context-string)
- (rear-context-string . "96 Feb 24 13:01 ")
- (position . 138))
-("Documents"
- (filename . "~/Documents/")
- (front-context-string . "600s_UT Shuttles")
- (rear-context-string . "48 Feb 17 20:45 ")
  (position . 130))
 ("Templates"
  (filename . "~/Templates/")
@@ -37,11 +67,6 @@
  (front-context-string . "Apps\n  drwxr-xr-")
  (rear-context-string . "96 Feb 13 16:19 ")
  (position . 126))
-(".emacs"
- (filename . "~/.emacs")
- (front-context-string . "\n;;;;;;;;;;;;;;;")
- (rear-context-string)
- (position . 1))
 ("UQ"
  (filename . "~/pCloudDrive/Projects/UQ/")
  (front-context-string . "Background\n  drw")
@@ -53,7 +78,7 @@
  (rear-context-string . "96 Feb 13 16:22 ")
  (position . 144))
 ("SPACEPOSI"
- (filename . "~/pCloudDrive/Projects/SPACEPOSI/")
+ (filename . "~/Projects/SPACEPOSI/")
  (front-context-string . "beamer\n  -rw-r--")
  (rear-context-string . "96 Aug 12  2018 ")
  (position . 157))
@@ -73,7 +98,7 @@
  (rear-context-string . "96 Nov  5 08:03 ")
  (position . 154))
 ("Projects"
- (filename . "~/pCloudDrive/Projects/")
+ (filename . "~/Projects/")
  (front-context-string . "ACIC-Challenge\n ")
  (rear-context-string . "96 Jan  9 10:38 ")
  (position . 139))
